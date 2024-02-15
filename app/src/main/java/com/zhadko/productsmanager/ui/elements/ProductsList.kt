@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.zhadko.productsmanager.domain.models.ProductDomain
 
 @Composable
-fun ProductsList(list: List<ProductDomain>) {
+fun ProductsList(list: List<ProductDomain>, action: (ProductDomain) -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp)
@@ -22,7 +22,9 @@ fun ProductsList(list: List<ProductDomain>) {
                 price = it.price,
                 category = it.category,
                 image = it.image
-            )
+            ) {
+                action(it)
+            }
         }
     }
 }

@@ -7,4 +7,5 @@ interface DatabaseRepository {
     suspend fun getProducts(): List<ProductEntity>
     suspend fun addNewProduct(productEntity: ProductEntity)
     suspend fun addProducts(productsEntity: List<ProductEntity>)
+    suspend fun deleteProductById(productId: Int)
 }

@@ -38,4 +38,11 @@ class ProductsListViewModel(
             getProductsList()
         }
     }
+
+    fun deleteProductById(productId: Int) {
+        viewModelScope.launch {
+            productsRepository.deleteProductById(productId)
+            getProductsList()
+        }
+    }
 }

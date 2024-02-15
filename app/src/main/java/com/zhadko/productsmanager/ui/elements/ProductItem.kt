@@ -1,6 +1,7 @@
 package com.zhadko.productsmanager.ui.elements
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
@@ -19,7 +21,8 @@ fun ProductItem(
     description: String,
     price: String,
     category: String,
-    image: String
+    image: String,
+    action: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -27,6 +30,11 @@ fun ProductItem(
             .padding(0.dp, 0.dp, 0.dp, 20.dp)
             .clip(shape = RoundedCornerShape(10.dp))
             .border(2.dp, Color.Black)
+            .pointerInput(Unit) {
+                detectTapGestures {
+                    action()
+                }
+            }
 
     ) {
         AsyncImage(model = image, contentDescription = "ddfs")

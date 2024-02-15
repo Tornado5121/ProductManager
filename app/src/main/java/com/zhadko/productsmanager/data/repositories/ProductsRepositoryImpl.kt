@@ -9,8 +9,6 @@ import com.zhadko.productsmanager.domain.iRepositories.ProductsRepository
 import com.zhadko.productsmanager.domain.models.DataResult
 import com.zhadko.productsmanager.domain.models.ProductDomain
 import com.zhadko.productsmanager.errors.ProductError
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ProductsRepositoryImpl @Inject constructor(
@@ -36,15 +34,17 @@ class ProductsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addProduct(product: ProductDomain) {
-        withContext(Dispatchers.IO) {
-            val json = JsonObject()
-            json.addProperty("title", product.title)
-            json.addProperty("price", product.price)
-            json.addProperty("description", product.description)
-            json.addProperty("category", product.category)
-            json.addProperty("image", product.image)
-            val item = fetcher.addNewProduct(json)
-            databaseRepository.addNewProduct(item.asDatabase())
-        }
+        val json = JsonObject()
+        json.addProperty("title", product.title)
+        json.addProperty("price", product.price)
+        json.addProperty("description", product.description)
+        json.addProperty("category", product.category)
+        json.addProperty("image", product.image)
+        val item = fetcher.addNewProduct(json)
+        databaseRepository.addNewProduct(item.asDatabase())
+    }
+
+    override suspend fun deleteProductById(productId: Int) {
+        databaseRepository.deleteProductById(productId)
     }
 }

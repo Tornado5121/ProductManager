@@ -71,7 +71,9 @@ fun ProductsListScreen(
             isVisibleButton.value = true
             isLoading.value = false
             if (isVisibleList.value) {
-                ProductsList(list = (uiState as ProductsListScreenState.Success).list)
+                ProductsList(list = (uiState as ProductsListScreenState.Success).list) {
+                    viewModel.deleteProductById(it.id)
+                }
             }
         }
     }
@@ -117,6 +119,11 @@ fun ProductsListScreen(
                         )
                     )
                 }
+                title.text = ""
+                description.text = ""
+                category.text = ""
+                price.text = ""
+                image.text = ""
             })
         }
     }

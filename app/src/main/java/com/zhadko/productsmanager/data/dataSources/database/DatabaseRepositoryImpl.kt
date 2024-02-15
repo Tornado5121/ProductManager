@@ -21,4 +21,8 @@ class DatabaseRepositoryImpl @Inject constructor(
     override suspend fun addProducts(productsEntity: List<ProductEntity>) {
         withContext(Dispatchers.IO) { dao.addProductsList(productsEntity) }
     }
+
+    override suspend fun deleteProductById(productId: Int) {
+        withContext(Dispatchers.IO) { dao.deleteProductById(productId) }
+    }
 }

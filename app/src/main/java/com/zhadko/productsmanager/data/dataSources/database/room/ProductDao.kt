@@ -15,4 +15,7 @@ interface ProductDao {
 
     @Insert
     fun addNewProduct(product: ProductEntity)
+
+    @Query("DELETE FROM productentity WHERE id = :productId")
+    fun deleteProductById(productId: Int)
 }

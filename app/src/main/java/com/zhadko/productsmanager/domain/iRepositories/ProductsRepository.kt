@@ -7,4 +7,5 @@ interface ProductsRepository {
 
     suspend fun getProducts(): DataResult
     suspend fun addProduct(product: ProductDomain)
+    suspend fun deleteProductById(productId: Int)
 }

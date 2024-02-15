@@ -53,40 +53,21 @@ android {
 }
 
 dependencies {
-    implementation(libs.core)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.constraint)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.lifecycle)
-
     //Compose
     val composeBom = platform("androidx.compose:compose-bom:2024.02.00")
     implementation(composeBom)
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
     implementation(libs.activity.compose)
     implementation(libs.foundation)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.navigation.compose)
 
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-
     //Coil
     implementation(libs.coil.compose)
 
-    //JetpackNavigation
-    implementation(libs.navigation.fragment.ktx)
-    implementation(libs.navigation.ui.ktx)
-
     //Dagger2
-    implementation("com.google.dagger:dagger:2.50")
-    kapt("com.google.dagger:dagger-compiler:2.50")
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 
     //Retrofit
     implementation(libs.retrofit)
@@ -95,6 +76,4 @@ dependencies {
     //Room
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
-
-    implementation("com.google.code.gson:gson:2.10.1")
 }
