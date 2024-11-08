@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,30 +36,30 @@ fun ProductsListScreen(
     val price = remember { TextFieldState() }
     val image = remember { TextFieldState() }
 
-    val isVisibleInputForm = remember { mutableStateOf(false) }
-    val isVisibleList = remember { mutableStateOf(true) }
-    val isVisibleButton = remember { mutableStateOf(true) }
-    val isFilled = remember { mutableStateOf(false) }
-    val isLoading = remember { mutableStateOf(true) }
-    val buttonTitle = remember { mutableStateOf("Show Input Dialog") }
+    var isVisibleInputForm by remember { mutableStateOf(false) }
+    var isVisibleList by remember { mutableStateOf(true) }
+    var isVisibleButton by remember { mutableStateOf(true) }
+    var isFilled by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
+    var buttonTitle by remember { mutableStateOf("Show Input Dialog") }
 
     when (uiState) {
         ProductsListScreenState.Empty -> {
-            isLoading.value = false
-            isVisibleList.value = false
+            isLoading = false
+            isVisibleList = false
             Text(text = "The list is empty")
         }
 
         is ProductsListScreenState.Error -> {
-            isLoading.value = false
-            isVisibleButton.value = false
+            isLoading = false
+            isVisibleButton = false
             Text(text = (uiState as ProductsListScreenState.Error).productError.customerMessage)
         }
 
         ProductsListScreenState.Idle -> {}
 
         ProductsListScreenState.Loading -> {
-            if (isLoading.value) {
+            if (isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier.width(64.dp),
                     color = MaterialTheme.colorScheme.secondary,
@@ -68,9 +69,9 @@ fun ProductsListScreen(
         }
 
         is ProductsListScreenState.Success -> {
-            isVisibleButton.value = true
-            isLoading.value = false
-            if (isVisibleList.value) {
+            isVisibleButton = true
+            isLoading = false
+            if (isVisibleList) {
                 ProductsList(list = (uiState as ProductsListScreenState.Success).list) {
                     viewModel.deleteProductById(it.id)
                 }
@@ -83,7 +84,7 @@ fun ProductsListScreen(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (isVisibleInputForm.value) {
+        if (isVisibleInputForm) {
             InputForm(
                 titleState = title,
                 descriptionState = description,
@@ -92,23 +93,23 @@ fun ProductsListScreen(
                 imageState = image
             )
         }
-        if (isVisibleButton.value) {
-            AddButton(text = buttonTitle.value, onClick = {
-                buttonTitle.value = "Add product"
-                isVisibleInputForm.value = true
-                isVisibleList.value = false
+        if (isVisibleButton) {
+            AddButton(text = buttonTitle, onClick = {
+                buttonTitle = "Add product"
+                isVisibleInputForm = true
+                isVisibleList = false
 
-                isFilled.value =
+                isFilled =
                     title.text.isNotBlank() &&
                             description.text.isNotBlank() &&
                             category.text.isNotBlank() &&
                             price.text.isNotBlank() &&
                             image.text.isNotBlank()
 
-                if (isFilled.value) {
-                    buttonTitle.value = "Show Input Dialog"
-                    isVisibleInputForm.value = false
-                    isVisibleList.value = true
+                if (isFilled) {
+                    buttonTitle = "Show Input Dialog"
+                    isVisibleInputForm = false
+                    isVisibleList = true
                     viewModel.addNewProduct(
                         ProductDomain(
                             title = title.text,
