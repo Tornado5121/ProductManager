@@ -1,4 +1,4 @@
-package com.zhadko.productsmanager.ui.screens
+package com.zhadko.productsmanager.ui.screens.productListScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,31 +17,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.zhadko.productsmanager.domain.models.ProductDomain
-import com.zhadko.productsmanager.domain.models.TextFieldState
-import com.zhadko.productsmanager.ui.elements.AddButton
-import com.zhadko.productsmanager.ui.elements.InputForm
-import com.zhadko.productsmanager.ui.elements.ProductsList
+import com.zhadko.productsmanager.ui.components.AddButton
+import com.zhadko.productsmanager.ui.components.ProductsList
 
 @Composable
 fun ProductsListScreen(
     viewModelFactory: ProductsListViewModelFactory,
-    viewModel: ProductsListViewModel = viewModel(factory = viewModelFactory)
+    viewModel: ProductsListViewModel = viewModel(factory = viewModelFactory),
+    showInputDialog: () -> Unit,
 ) {
     val uiState by viewModel.state.collectAsState()
 
-    val title = remember { TextFieldState() }
-    val description = remember { TextFieldState() }
-    val category = remember { TextFieldState() }
-    val price = remember { TextFieldState() }
-    val image = remember { TextFieldState() }
-
-    var isVisibleInputForm by remember { mutableStateOf(false) }
     var isVisibleList by remember { mutableStateOf(true) }
     var isVisibleButton by remember { mutableStateOf(true) }
-    var isFilled by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(true) }
-    var buttonTitle by remember { mutableStateOf("Show Input Dialog") }
 
     when (uiState) {
         ProductsListScreenState.Empty -> {
@@ -84,48 +73,7 @@ fun ProductsListScreen(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (isVisibleInputForm) {
-            InputForm(
-                titleState = title,
-                descriptionState = description,
-                categoryState = category,
-                priceState = price,
-                imageState = image
-            )
-        }
-        if (isVisibleButton) {
-            AddButton(text = buttonTitle, onClick = {
-                buttonTitle = "Add product"
-                isVisibleInputForm = true
-                isVisibleList = false
 
-                isFilled =
-                    title.text.isNotBlank() &&
-                            description.text.isNotBlank() &&
-                            category.text.isNotBlank() &&
-                            price.text.isNotBlank() &&
-                            image.text.isNotBlank()
-
-                if (isFilled) {
-                    buttonTitle = "Show Input Dialog"
-                    isVisibleInputForm = false
-                    isVisibleList = true
-                    viewModel.addNewProduct(
-                        ProductDomain(
-                            title = title.text,
-                            price = price.text,
-                            description = description.text,
-                            image = image.text,
-                            category = category.text,
-                        )
-                    )
-                }
-                title.text = ""
-                description.text = ""
-                category.text = ""
-                price.text = ""
-                image.text = ""
-            })
-        }
+        AddButton(text = "Show Input Dialog", onClick = showInputDialog)
     }
 }

@@ -1,4 +1,4 @@
-package com.zhadko.productsmanager.ui.elements
+package com.zhadko.productsmanager.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize

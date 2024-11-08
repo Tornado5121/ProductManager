@@ -5,7 +5,7 @@ import com.zhadko.productsmanager.data.dataSources.database.DatabaseRepositoryIm
 import com.zhadko.productsmanager.data.dataSources.network.ProductsFetcher
 import com.zhadko.productsmanager.data.dataSources.network.ProductsFetcherImpl
 import com.zhadko.productsmanager.data.repositories.ProductsRepositoryImpl
-import com.zhadko.productsmanager.domain.iRepositories.ProductsRepository
+import com.zhadko.productsmanager.domain.repositories.ProductsRepository
 import dagger.Binds
 import dagger.Module
 

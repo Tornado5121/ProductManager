@@ -1,8 +1,8 @@
-package com.zhadko.productsmanager.ui.screens
+package com.zhadko.productsmanager.ui.screens.productListScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zhadko.productsmanager.domain.iRepositories.ProductsRepository
+import com.zhadko.productsmanager.domain.repositories.ProductsRepository
 import com.zhadko.productsmanager.domain.models.DataResult
 import com.zhadko.productsmanager.domain.models.ProductDomain
 import kotlinx.coroutines.flow.MutableStateFlow

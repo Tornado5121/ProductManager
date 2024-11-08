@@ -1,4 +1,4 @@
-package com.zhadko.productsmanager.domain.iRepositories
+package com.zhadko.productsmanager.domain.repositories
 
 import com.zhadko.productsmanager.domain.models.DataResult
 import com.zhadko.productsmanager.domain.models.ProductDomain

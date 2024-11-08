@@ -1,4 +1,4 @@
-package com.zhadko.productsmanager.ui.elements
+package com.zhadko.productsmanager.ui.components
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
