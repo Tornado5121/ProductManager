@@ -56,13 +56,6 @@ class ProductsListViewModel(
         }
     }
 
-    fun addNewProduct(product: ProductDomain) {
-        viewModelScope.launch {
-            productsRepository.addProduct(product)
-            getProductsList()
-        }
-    }
-
     fun deleteProductById(productId: Int) {
         viewModelScope.launch {
             productsRepository.deleteProductById(productId)
