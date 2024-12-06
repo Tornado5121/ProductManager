@@ -5,7 +5,7 @@ import com.zhadko.productsmanager.data.dataSources.database.DatabaseRepository
 import com.zhadko.productsmanager.data.dataSources.database.extensions.asDomain
 import com.zhadko.productsmanager.data.dataSources.network.ProductsFetcher
 import com.zhadko.productsmanager.data.dataSources.network.extensions.asDatabase
-import com.zhadko.productsmanager.domain.extensions.asDatabase
+import com.zhadko.productsmanager.domain.mappers.asDatabase
 import com.zhadko.productsmanager.domain.models.DataResult
 import com.zhadko.productsmanager.domain.models.ProductDomain
 import com.zhadko.productsmanager.domain.repositories.ProductsRepository

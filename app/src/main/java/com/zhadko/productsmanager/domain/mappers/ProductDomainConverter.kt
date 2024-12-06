@@ -1,4 +1,4 @@
-package com.zhadko.productsmanager.domain.extensions
+package com.zhadko.productsmanager.domain.mappers
 
 import com.zhadko.productsmanager.data.dataSources.database.room.ProductEntity
 import com.zhadko.productsmanager.domain.models.ProductDomain
