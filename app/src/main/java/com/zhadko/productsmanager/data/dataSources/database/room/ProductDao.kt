@@ -19,4 +19,7 @@ interface ProductDao {
 
     @Query("DELETE FROM productentity WHERE id = :productId")
     fun deleteProductById(productId: Int)
+
+    @Query("DELETE FROM productentity")
+    fun deleteProducts()
 }

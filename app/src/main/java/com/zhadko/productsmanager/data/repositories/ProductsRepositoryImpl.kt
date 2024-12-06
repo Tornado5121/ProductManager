@@ -10,6 +10,7 @@ import com.zhadko.productsmanager.domain.models.DataResult
 import com.zhadko.productsmanager.domain.models.ProductDomain
 import com.zhadko.productsmanager.domain.repositories.ProductsRepository
 import com.zhadko.productsmanager.errors.ProductError
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -19,15 +20,17 @@ class ProductsRepositoryImpl @Inject constructor(
 ) : ProductsRepository {
 
     override suspend fun getProducts(): DataResult {
-
-        val productsList = try {
-            fetcher.getProducts()
-        } catch (e: Exception) {
-            return DataResult.Error(ProductError(techMessage = e.message.toString()))
+        val isDbProductListEmpty = databaseRepository.getProducts().map { list ->
+            list.isEmpty()
         }
-        if (productsList.isEmpty()) {
-            return DataResult.Empty
-        } else {
+
+        if (isDbProductListEmpty.first()) {
+            val productsList = try {
+                fetcher.getProducts()
+            } catch (e: Exception) {
+                return DataResult.Error(ProductError(techMessage = e.message.toString()))
+            }
+
             databaseRepository.addProducts(productsList.asDatabase())
         }
 
