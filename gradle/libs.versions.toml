@@ -8,12 +8,15 @@ foundation = "1.6.1"
 lifecycleViewmodelCompose = "2.7.0"
 navigationCompose = "2.7.7"
 navigationSafeArgsGradlePlugin = "2.7.7"
+roomKtx = "2.6.1"
 roomRuntime = "2.6.1"
 squareup-retrofit = "2.9.0"
 
 [libraries]
 
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-material3 = { module = "androidx.compose.material3:material3" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "squareup-retrofit" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }

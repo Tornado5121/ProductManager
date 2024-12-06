@@ -22,6 +22,7 @@ fun ProductsListScreen(
     showInputDialog: () -> Unit,
 ) {
     val uiState by viewModel.state.collectAsState()
+    val products by uiState.list.collectAsState(initial = emptyList())
 
     if (uiState.isLoading) {
         Box(
@@ -42,7 +43,7 @@ fun ProductsListScreen(
         ) {
             AddButton(text = "Show Input Dialog", onClick = showInputDialog)
 
-            ProductsList(list = uiState.list) {
+            ProductsList(list = products) {
                 viewModel.deleteProductById(it.id)
             }
         }

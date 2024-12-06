@@ -56,7 +56,7 @@ dependencies {
     //Compose
     val composeBom = platform("androidx.compose:compose-bom:2024.02.00")
     implementation(composeBom)
-    implementation("androidx.compose.material3:material3")
+    implementation(libs.androidx.material3)
     implementation(libs.activity.compose)
     implementation(libs.foundation)
     implementation(libs.lifecycle.viewmodel.compose)
@@ -75,5 +75,6 @@ dependencies {
 
     //Room
     implementation(libs.room.runtime)
+    implementation(libs.androidx.room.ktx)
     kapt(libs.room.compiler)
 }
